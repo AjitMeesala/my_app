@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Models/catalog.dart';
+import 'package:my_app/Screens/product_details.dart';
 import 'package:my_app/Widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -13,7 +14,13 @@ class CatalogList extends StatelessWidget {
       itemCount: CatalogModel.items.length,
       itemBuilder: (context, index) {
         final catalog = CatalogModel.items[index];
-        return CatalogItem(catalog: catalog);
+        return InkWell(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductDetails(catalog: catalog))),
+          child: CatalogItem(catalog: catalog),
+        );
       },
     );
   }
@@ -31,13 +38,15 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
         child: Row(
       children: [
-        Image.network(catalog.image)
-            .box
-            .p16
-            .color(MyTheme.creamColor)
-            .make()
-            .p16()
-            .w40(context),
+        Hero(
+            tag: catalog.id.toString(),
+            child: Image.network(catalog.image)
+                .box
+                .p16
+                .color(MyTheme.creamColor)
+                .make()
+                .p16()
+                .w40(context)),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +69,7 @@ class CatalogItem extends StatelessWidget {
                             const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))))),
-                    child: "Buy".text.white.make(),
+                    child: "Add to Cart".text.white.make(),
                   )
                 ],
               ).pOnly(right: 8.0),

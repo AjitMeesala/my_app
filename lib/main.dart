@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
+import "package:my_app/Screens/cart.dart";
 import "package:my_app/Screens/home.dart";
 import "package:my_app/Screens/login.dart";
+import 'package:my_app/Screens/register_page.dart';
 import "package:my_app/Utilities/routes.dart";
 import "package:my_app/Widgets/themes.dart";
 
@@ -21,8 +23,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: RouteSet.homeRoute,
       routes: {
+        "/": (context) => const Login(),
         RouteSet.homeRoute: (context) => const Home(),
         RouteSet.loginRoute: (context) => const Login(),
+        RouteSet.cartRoute: (context) => const Cart(),
+        RouteSet.testRoute: (context) => const RegisterPage(),
       },
     );
   }

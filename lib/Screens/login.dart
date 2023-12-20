@@ -107,17 +107,6 @@ class _LoginState extends State<Login> {
                                 fontSize: 18))),
               ),
             )
-            // ElevatedButton(
-            //   style: TextButton.styleFrom(minimumSize: const Size(150, 50)),
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, RouteSet.homeRoute);
-            //   },
-            //   child: const Text("Login",
-            //       style: TextStyle(
-            //           fontSize: 15,
-            //           letterSpacing: 2,
-            //           fontWeight: FontWeight.bold)),
-            // )
           ],
         ),
       )),

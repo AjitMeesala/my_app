@@ -1,8 +1,10 @@
 import 'dart:convert';
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:my_app/Screens/home_widgets/catalog_header.dart";
-import "package:my_app/Screens/home_widgets/catalog_list.dart";
+import "package:my_app/Utilities/routes.dart";
+import 'package:my_app/Widgets/home_widgets/catalog_header.dart';
+import 'package:my_app/Widgets/home_widgets/catalog_list.dart';
 import "package:velocity_x/velocity_x.dart";
 import "package:my_app/Models/catalog.dart";
 import "package:my_app/Widgets/themes.dart";
@@ -36,7 +38,12 @@ class _HomePageState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyTheme.creamColor,
+        backgroundColor: context.cardColor,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: MyTheme.darkBluishColor,
+          onPressed: () => {Navigator.pushNamed(context, RouteSet.cartRoute)},
+          child: const Icon(CupertinoIcons.cart, color: Colors.white, size: 25),
+        ),
         body: SafeArea(
             // ignore: avoid_unnecessary_containers
             child: Container(
@@ -46,7 +53,7 @@ class _HomePageState extends State<Home> {
                   children: [
                     const CatalogHeader(),
                     if (CatalogModel.items.isNotEmpty)
-                      const CatalogList().expand()
+                      const CatalogList().pOnly(top: 16).expand()
                     else
                       const CircularProgressIndicator().centered().expand()
                   ],
