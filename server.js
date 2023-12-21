@@ -54,8 +54,6 @@ app.post('/api/register', async (req, res) => {
     try {
       // Extract email and password from the request body
       const { name, mobile, email, password } = req.body;
-
-      console.log(req.body);
   
       // Check if the email already exists
       const existingUser = await User.findOne({ email });
@@ -76,12 +74,11 @@ app.post('/api/register', async (req, res) => {
       // Respond with a success message
       res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-      console.log(req.body);
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     }
   });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running`);
 });
