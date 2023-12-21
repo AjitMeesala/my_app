@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Models/user.dart';
 import 'package:my_app/Utilities/api/register_api.dart';
+import 'package:my_app/Utilities/routes.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -19,19 +20,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // oveToHome(BuildContext context) async {
-  //   if (_formkey.currentState!.validate()) {
-  //     setState(() {
-  //       changeButton = true;
-  //     });
-  //     await Future.delayed(const Duration(milliseconds: 500));
-  //     // ignore: use_build_context_synchronously
-  //     await Navigator.pushNamed(context, RouteSet.homeRoute);
-  //     setState(() {
-  //       changeButton = false;
-  //     });
-  //   }
-  // }
+  oveToHome(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      await Future.delayed(const Duration(milliseconds: 500));
+      // ignore: use_build_context_synchronously
+      await Navigator.pushNamed(context, RouteSet.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
