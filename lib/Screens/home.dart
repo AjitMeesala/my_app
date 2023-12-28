@@ -1,13 +1,18 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:convert';
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:my_app/Models/cart_model.dart";
 import "package:my_app/Utilities/routes.dart";
 import 'package:my_app/Widgets/home_widgets/catalog_header.dart';
 import 'package:my_app/Widgets/home_widgets/catalog_list.dart';
+import "package:my_app/core/store.dart";
 import "package:velocity_x/velocity_x.dart";
 import "package:my_app/Models/catalog.dart";
 import "package:my_app/Widgets/themes.dart";
+import "package:http/http.dart" as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +22,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomePageState extends State<Home> {
+  final url = "";
   @override
   void initState() {
     super.initState();
@@ -37,17 +43,29 @@ class _HomePageState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
-        backgroundColor: context.cardColor,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: MyTheme.darkBluishColor,
-          onPressed: () => {Navigator.pushNamed(context, RouteSet.cartRoute)},
-          child: const Icon(CupertinoIcons.cart, color: Colors.white, size: 25),
+        backgroundColor: context.canvasColor,
+        floatingActionButton: VxBuilder(
+          mutations: const {AddMutation, RemoveMutation},
+          builder: (context, store, status) => FloatingActionButton(
+            shape: const StadiumBorder(),
+            backgroundColor: MyTheme.darkBluishColor,
+            onPressed: () => {Navigator.pushNamed(context, RouteSet.cartRoute)},
+            child:
+                const Icon(CupertinoIcons.cart, color: Colors.white, size: 25),
+          ).badge(
+            color: Vx.green500,
+            size: 20,
+            count: _cart.items.length,
+            textStyle: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+          ),
         ),
         body: SafeArea(
             // ignore: avoid_unnecessary_containers
             child: Container(
-                padding: Vx.m32,
+                padding: Vx.mOnly(top: 32, right: 16, left: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

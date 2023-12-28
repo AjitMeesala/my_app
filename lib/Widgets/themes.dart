@@ -17,11 +17,11 @@ class MyTheme {
         ),
       ),
       secondaryHeaderColor: darkBluishColor,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         color: Colors.white,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        primaryTextTheme: Theme.of(context).textTheme,
+        iconTheme: IconThemeData(color: Colors.black),
+        foregroundColor: Colors.black,
       ));
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
@@ -29,21 +29,31 @@ class MyTheme {
       fontFamily: GoogleFonts.poppins().fontFamily,
       cardColor: Colors.black,
       canvasColor: darkCreamColor,
-      buttonColor: lightBluishColor,
-      accentColor: Colors.white,
+      buttonTheme: ButtonThemeData(
+        buttonColor: lightBluishColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+      ),
+      secondaryHeaderColor: Colors.white,
       appBarTheme: AppBarTheme(
         color: Colors.black,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.white),
-        textTheme: Theme.of(context).textTheme.copyWith(
-              headline6:
-                  context.textTheme.headline6.copyWith(color: Colors.white),
-            ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        foregroundColor: Theme.of(context).textTheme.titleLarge!.color,
+        toolbarTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Colors.white,
+        ),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Colors.white,
+        ),    
       ));
 
   //Colors
-  static Color creamColor = Color(0xfff5f5f5);
+  static Color creamColor = const Color(0xfff5f5f5);
   static Color darkCreamColor = Vx.gray900;
-  static Color darkBluishColor = Color(0xff403b58);
+  static Color darkBluishColor = const Color(0xff403b58);
   static Color lightBluishColor = Vx.indigo500;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Models/catalog.dart';
-import 'package:my_app/Widgets/themes.dart';
+import 'package:my_app/Widgets/home_widgets/addtocart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -10,24 +10,15 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: context.canvasColor,
         bottomNavigationBar: Container(
-          color: Colors.white,
+          color: context.cardColor,
           child: ButtonBar(
             buttonPadding: EdgeInsets.zero,
             alignment: MainAxisAlignment.spaceBetween,
             children: [
               "\$${catalog.price}".text.bold.xl4.make(),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(MyTheme.darkBluishColor),
-                    shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))))),
-                child: "Add to Cart".text.white.make(),
-              )
+              AddToCart(catalog: catalog)
             ],
           ).p32(),
         ),
@@ -46,12 +37,12 @@ class ProductDetails extends StatelessWidget {
                     edge: VxEdge.top,
                     arcType: VxArcType.convey,
                     child: Container(
-                      color: Colors.white,
+                      color: context.cardColor,
                       width: context.screenWidth,
                       child: Column(
                         children: [
                           catalog.name.text.xl4
-                              .color(MyTheme.darkBluishColor)
+                              .color(context.accentColor)
                               .bold
                               .make(),
                           catalog.desc.text.xl

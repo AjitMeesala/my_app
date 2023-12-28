@@ -5,9 +5,11 @@ import "package:my_app/Screens/login.dart";
 import 'package:my_app/Screens/register_page.dart';
 import "package:my_app/Utilities/routes.dart";
 import "package:my_app/Widgets/themes.dart";
+import "package:my_app/core/store.dart";
+import "package:velocity_x/velocity_x.dart";
 
 void main() {
-  runApp(const MyApp());
+  runApp(VxState(store: MyStore(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,11 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Sourcify",
-      themeMode: ThemeMode.light,
-      theme: MyTheme.lightTheme(),
-      darkTheme: MyTheme.darkTheme(),
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: RouteSet.homeRoute,
+      initialRoute: RouteSet.testRoute,
       routes: {
         "/": (context) => const Login(),
         RouteSet.homeRoute: (context) => const Home(),
